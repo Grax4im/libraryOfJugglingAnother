@@ -15,20 +15,23 @@ public class CloginUser {
    public static Response loginUser(User user) {
         //se o usuário existir
         String jwt = null;
+        User newUser = findUser(user.getName());
 
-        if(loginAndPassword(user.getName(), user.getPassword())) {
-            //user agora é o do banco e não mais o enviado pelo usuário 
-            user = findUser(user.getName());
-          
-            //se for admin retorna o jwt de admin
-            if(isAdmin(user)) {
-                System.out.println(jwt);
-                return Response.ok(jwtAdmin(user)).build();
-            } 
+        if(newUser != null) {
+            if(loginAndPassword(user.getName(), user.getPassword())) {
+                //user agora é o do banco e não mais o enviado pelo usuário 
+                user = findUser(user.getName());
+            
+                //se for admin retorna o jwt de admin
+                if(isAdmin(user)) {
+                    System.out.println(jwt);
+                    return Response.ok(jwtAdmin(user)).build();
+                } 
 
-            //se for criador, retorna jwt de criador
-            else {
-                return Response.ok(jwtCreator(user)).build();
+                //se for criador, retorna jwt de criador
+                else {
+                    return Response.ok(jwtCreator(user)).build();
+                }
             }
         }
         return Response.status(404).build();
@@ -38,6 +41,7 @@ public class CloginUser {
     private static boolean loginAndPassword(String name, String password) {
         User userName = User.find("name", name).firstResult();
         User userPass = User.find("password", password).firstResult();
+        if (userPass == null) return false;
         return (userName.getPassword().equals(userPass.getPassword()));
     }
 
