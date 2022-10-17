@@ -1,6 +1,7 @@
 package ifrs.edu.View;
 
 import javax.annotation.security.RolesAllowed;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -12,13 +13,14 @@ import ifrs.edu.Control.ControlUpdate;
 import ifrs.edu.Entity.Trick;
 import ifrs.edu.Entity.User;
 
+@Transactional
 @Path("/")
 public class Update {
 
 
     @PUT
     @Path("/trick/{id}")
-    @RolesAllowed({"Creator"})
+    @RolesAllowed({"Creator", "Admin"})
     public Response updateTrick(int id, Trick trick) {
         return ControlUpdate.updateTrickControl(id, trick);
     }

@@ -26,7 +26,7 @@ public class Create {
 
     @POST
     @Path("/trick")
-    @RolesAllowed({"Creator"})
+    @RolesAllowed({"Creator", "Admin"})
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createTrick(Trick trick) {
         return CcreateTrick.createTrick(trick);
