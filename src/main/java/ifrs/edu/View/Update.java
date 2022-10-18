@@ -21,7 +21,7 @@ public class Update {
     @PUT
     @Path("/trick/{id}")
     @RolesAllowed({"Creator", "Admin"})
-    public Response updateTrick(int id, Trick trick) {
+    public Response updateTrick(@PathParam("id") Long id, Trick trick) {
         return ControlUpdate.updateTrickControl(id, trick);
     }
 
@@ -29,7 +29,7 @@ public class Update {
     @Path("/user/{id}")
     @RolesAllowed({"Admin"})
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("id") int id,User user) {
+    public Response updateUser(@PathParam("id") Long id,User user) {
         return ControlUpdate.updateUserControl(id, user);
     }
 }

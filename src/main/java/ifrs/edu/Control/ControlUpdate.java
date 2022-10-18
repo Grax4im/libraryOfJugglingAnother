@@ -7,7 +7,7 @@ import ifrs.edu.Entity.User;
 
 public class ControlUpdate {
     
-    public static Response updateUserControl(int userId, User user) {
+    public static Response updateUserControl(Long userId, User user) {
         
         User newUser = searchUser(userId); 
 
@@ -20,15 +20,15 @@ public class ControlUpdate {
         return Response.status(404).build();
     }
 
-    public static User searchUser(int userId) {
+    public static User searchUser(Long userId) {
         return User.findById(userId);
     }
 
-    public static Response updateTrickControl(int trickId, Trick trick) {
+    public static Response updateTrickControl(Long trickId, Trick trick) {
         
         Trick newTrick = searchTrick(trickId); 
 
-        if(newTrick != null || CcreateTrick.validTrick(trick)) {
+        if(newTrick != null) {
            newTrick.setDescription(trick.getDescription());
            newTrick.setDifficult(trick.getDifficult());
            newTrick.setImage(trick.getImage());
@@ -45,7 +45,7 @@ public class ControlUpdate {
         return Response.status(404).build();
     }
     
-    public static Trick searchTrick(int trickId) {
+    public static Trick searchTrick(Long trickId) {
         return Trick.findById(trickId);
     }
 
