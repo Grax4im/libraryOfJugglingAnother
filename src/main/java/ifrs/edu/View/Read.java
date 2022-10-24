@@ -27,15 +27,15 @@ public class Read {
     }
 
     @GET
-    @Path("trick/{difficult}")
-    public List<PanacheEntityBase> seeTrickByDifficult(@PathParam("difficult") Long difficult){
-        return Trick.find("difficult", difficult);
+    @Path("trick/difficult/{difficult}")
+    public List<PanacheEntityBase> seeTrickByDifficult(@PathParam("difficult") Integer difficult){
+        return Trick.list("difficult", difficult);
     }
 
     @GET
-    @Path("trick/{balls}")
-    public List<PanacheEntityBase> seeTrickByBalls(@PathParam("balls") Long balls){
-        return Trick.find("numberOfBalls", balls);
+    @Path("trick/balls/{balls}")
+    public List<PanacheEntityBase> seeTrickByBalls(@PathParam("balls") Integer balls){
+        return Trick.list("numberOfBalls", balls);
     }
 
     @GET
